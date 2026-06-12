@@ -1,0 +1,41 @@
+pipeline{
+    agent any
+    environment{
+        INSTAGRAM_NAREN= "@naren_quinayas"
+    }
+    stages{
+        stage("Saludo1"){
+            steps{
+                echo "Hola desde saludo 1"
+            }
+        }
+        stage("Saludo2"){
+            steps{
+                echo "Hola desde saludo 2, paso 1"
+                echo "Hola desde saludo 2, paso 2"
+            }
+        }
+        stage("Imprimir variable de entorno"){
+            steps{
+                echo "IG de nare: ${env.INSTAGRAM_NAREN}"
+                echo "IG de nare: ${INSTAGRAM_NAREN}"
+                echo "IG de nare: $INSTAGRAM_NAREN"
+                echo "========================================="
+                sh "echo 'IG de nare: ${env.INSTAGRAM_NAREN}'"
+                sh "echo 'IG de nare: ${INSTAGRAM_NAREN}'"
+                sh "echo 'IG de nare: $INSTAGRAM_NAREN'"
+            }
+        }
+        stage("Imprimir variables definidas en el system de Jenkins"){
+            steps{
+                echo " ${env.INSTAGRAM}"
+                echo "${INSTAGRAM}"
+                echo "$INSTAGRAM"
+                echo "========================================="
+                sh "echo ${env.INSTAGRAM}"
+                sh "echo  ${INSTAGRAM}"
+                sh """echo $INSTAGRAM"""
+            }
+        }
+    }
+}
